@@ -12,3 +12,12 @@ header {
 .product-row div {
   width: 25%;
 }
+
+.product-row .product-buttons {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.product-row:hover .product-buttons {
+  opacity: 1;
+}

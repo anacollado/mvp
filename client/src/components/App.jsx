@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   addProduct(productInfo) {
-    axios({
+    return axios({
       method: 'post',
       url: '/api/products',
       data: productInfo
@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   updateProduct(id, productInfo) {
-    axios({
+    return axios({
       method: 'put',
       url: `/api/products/${id}`,
       data: productInfo
@@ -50,13 +50,14 @@ class App extends React.Component {
     .then(this.getProductList);
   }
 
-  deleteProduct(id) {
-    axios({
-      method: 'delete',
-      url: `/api/products/${id}`
-    })
-    .then(this.getProductList);
-
+  deleteProduct(id, productInfo) {
+    if (window.confirm(`Are you sure you want to delete ${productInfo.brand} ${productInfo.productName}?`)) {
+      axios({
+        method: 'delete',
+        url: `/api/products/${id}`
+      })
+      .then(this.getProductList);
+    }
   }
 
   getProductList() {
@@ -77,7 +78,7 @@ class App extends React.Component {
       <div>
         <Header onSearchInputChange={this.onSearchInputChange} value={this.state.searchInputValue}/>
         <h1>your vanity</h1>
-        <ProductList productList={filteredProductList} deleteProduct={this.deleteProduct} />
+        <ProductList productList={filteredProductList} deleteProduct={this.deleteProduct} updateProduct={this.updateProduct} />
         <NewProduct addProduct={this.addProduct}/>
       </div>
     )
