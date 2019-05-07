@@ -85,10 +85,16 @@ div.product-remaining {
   justify-content: space-between;
   padding-bottom: 20px;
   width: 250px;
+  align-items: center;
 }
 
 .new-product-label input, .new-product-label select, .new-product-label textarea {
   margin-left: 5px;
+  max-width: 150px;
+  min-width: 150px;
+  box-sizing: border-box;
+  min-height: 25px;
+  max-height: 25px;
 }
 
 .new-product-container form {
@@ -127,10 +133,19 @@ div.product-remaining {
   justify-content: center;
 }
 
+.add-button:hover, .cancel-button:hover, .save-button:hover, .product-buttons button:hover {
+  background-color: rgb(238,174,202);
+}
+
+.product-buttons {
+  width: 100px;
+  display: flex;
+}
+
 .cancel-button, .save-button, .product-buttons button, .add-button {
   height: 20px;
   color: white;
   border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background-color: #94bbe9;
+  transition: background-color 0.4s;
 }
