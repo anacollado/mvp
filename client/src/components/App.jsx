@@ -23,6 +23,8 @@ class App extends React.Component {
     }
     this.addProduct = this.addProduct.bind(this);
     this.getProductList = this.getProductList.bind(this);
+    this.updateProduct = this.updateProduct.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
     this.onSearchInputChange = this.onSearchInputChange.bind(this);
   }
 
@@ -37,6 +39,24 @@ class App extends React.Component {
       data: productInfo
     })
     .then(this.getProductList);
+  }
+
+  updateProduct(id, productInfo) {
+    axios({
+      method: 'put',
+      url: `/api/products/${id}`,
+      data: productInfo
+    })
+    .then(this.getProductList);
+  }
+
+  deleteProduct(id) {
+    axios({
+      method: 'delete',
+      url: `/api/products/${id}`
+    })
+    .then(this.getProductList);
+
   }
 
   getProductList() {
@@ -57,7 +77,7 @@ class App extends React.Component {
       <div>
         <Header onSearchInputChange={this.onSearchInputChange} value={this.state.searchInputValue}/>
         <h1>your vanity</h1>
-        <ProductList productList={filteredProductList} />
+        <ProductList productList={filteredProductList} deleteProduct={this.deleteProduct} />
         <NewProduct addProduct={this.addProduct}/>
       </div>
     )

@@ -10,7 +10,7 @@ class NewProduct extends React.Component {
       datePurchased: '',
       amountRemaining: 100
     };
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {

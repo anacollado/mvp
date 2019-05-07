@@ -5,28 +5,39 @@ const formatDate = str => {
   return date.toLocaleDateString();
 }
 
+class Product extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-function Product(props) {
-  return (
-    <div className="product-row">
-      <div>{props.product.brand}</div>
-      <div>{props.product.productName}</div>
-      <div>{props.product.notes}</div>
-      <div>{formatDate(props.product.datePurchased)}</div>
-      <div>{props.product.amountRemaining}%</div>
-      <div>
-        <button>edit</button>
-        <button>delete</button>
+    };
+  }
+
+  render() {
+    const id = this.props.product.productId;
+    return (
+      <div className="product-row">
+        <div>{this.props.product.brand}</div>
+        <div>{this.props.product.productName}</div>
+        <div>{this.props.product.notes}</div>
+        <div>{formatDate(this.props.product.datePurchased)}</div>
+        <div>{this.props.product.amountRemaining}%</div>
+        <div>
+          <button>edit</button>
+          <button onClick={() => this.props.deleteProduct(id)}>delete</button>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
+
+
 
 function ProductList(props) {
   return (
     <div>
       {props.productList.map(product => {
-        return <Product product={product} key={product.productId} />
+        return <Product product={product} key={product.productId} deleteProduct={props.deleteProduct} />
       })}
     </div>
   )
