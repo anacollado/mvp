@@ -4,7 +4,7 @@ function Header(props) {
   return (
     <header>
       <h1>vanity</h1>
-      <h3 >search</h3>
+      <input placeholder="Search products..." value={props.searchInputValue} onChange={props.onSearchInputChange}></input>
     </header>
   )
 }

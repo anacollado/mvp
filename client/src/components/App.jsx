@@ -6,14 +6,28 @@ import axios from 'axios';
 
 import '../main.css';
 
+const filterProductsBySearch = (searchString, productList) => {
+  const lowerCaseSearchStr = searchString.toLowerCase();
+  return productList.filter(product => {
+
+    return product.brand.toLowerCase().includes(lowerCaseSearchStr) || product.productName.toLowerCase().includes(lowerCaseSearchStr) || product.notes.toLowerCase().includes(lowerCaseSearchStr);
+  })
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productList: []
+      productList: [],
+      searchInputValue: ''
     }
     this.addProduct = this.addProduct.bind(this);
     this.getProductList = this.getProductList.bind(this);
+    this.onSearchInputChange = this.onSearchInputChange.bind(this);
+  }
+
+  onSearchInputChange(e) {
+    this.setState({searchInputValue: e.target.value});
   }
 
   addProduct(productInfo) {
@@ -38,11 +52,12 @@ class App extends React.Component {
   }
 
   render() {
+    const filteredProductList = filterProductsBySearch(this.state.searchInputValue, this.state.productList);
     return (
       <div>
-        <Header />
+        <Header onSearchInputChange={this.onSearchInputChange} value={this.state.searchInputValue}/>
         <h1>your vanity</h1>
-        <ProductList productList={this.state.productList} />
+        <ProductList productList={filteredProductList} />
         <NewProduct addProduct={this.addProduct}/>
       </div>
     )
