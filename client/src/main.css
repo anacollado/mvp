@@ -1,0 +1,14 @@
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-row{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-row div {
+  width: 20%;
+}
