@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   onSearchInputChange(e) {
-    this.setState({searchInputValue: e.target.value});
+    this.setState({ searchInputValue: e.target.value });
   }
 
   addProduct(productInfo) {
@@ -38,7 +38,7 @@ class App extends React.Component {
       url: '/api/products',
       data: productInfo
     })
-    .then(this.getProductList);
+      .then(this.getProductList);
   }
 
   updateProduct(id, productInfo) {
@@ -47,7 +47,7 @@ class App extends React.Component {
       url: `/api/products/${id}`,
       data: productInfo
     })
-    .then(this.getProductList);
+      .then(this.getProductList);
   }
 
   deleteProduct(id, productInfo) {
@@ -56,7 +56,7 @@ class App extends React.Component {
         method: 'delete',
         url: `/api/products/${id}`
       })
-      .then(this.getProductList);
+        .then(this.getProductList);
     }
   }
 
@@ -75,11 +75,13 @@ class App extends React.Component {
   render() {
     const filteredProductList = filterProductsBySearch(this.state.searchInputValue, this.state.productList);
     return (
-      <div>
-        <Header onSearchInputChange={this.onSearchInputChange} value={this.state.searchInputValue}/>
-        <h1>your vanity</h1>
-        <ProductList productList={filteredProductList} deleteProduct={this.deleteProduct} updateProduct={this.updateProduct} />
-        <NewProduct addProduct={this.addProduct}/>
+      <div className="app">
+        <Header onSearchInputChange={this.onSearchInputChange} value={this.state.searchInputValue} />
+        <h3 className="collection-title">✨ your collection ✨</h3>
+        <div className="main-body">
+          <ProductList productList={filteredProductList} deleteProduct={this.deleteProduct} updateProduct={this.updateProduct} />
+          <NewProduct addProduct={this.addProduct} />
+        </div>
       </div>
     )
   }

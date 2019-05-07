@@ -27,23 +27,23 @@ class NewProduct extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="new-product-container" >
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <label className="new-product-label">
             Brand: <input type="text" value={this.state.brand} onChange={e => this.setState({ brand: e.target.value })} />
           </label>
-          <label>
+          <label className="new-product-label">
             Product Name: <input type="text" value={this.state.productName} onChange={e => this.setState({ productName: e.target.value })} />
           </label>
-          <label>
+          <label className="new-product-label">
             Notes: <textarea value={this.state.notes} onChange={e => this.setState({ notes: e.target.value })} />
           </label>
-          <label>
-            Date Purchased <input type="date" value={this.state.datePurchased} onChange={e => this.setState({ datePurchased: e.target.value })} />
+          <label className="new-product-label">
+            Date Purchased: <input type="date" value={this.state.datePurchased} onChange={e => this.setState({ datePurchased: e.target.value })} />
           </label>
-          <label>
+          <label className="new-product-label">
             Amount Remaining:
-          <select value={this.state.amountRemaining} onChange={e => this.setState({ amountRemaining: e.target.value })}>
+          <select className="new-product-label" value={this.state.amountRemaining} onChange={e => this.setState({ amountRemaining: e.target.value })}>
               <option value="0">0%</option>
               <option value="25">25%</option>
               <option value="50">50%</option>
@@ -51,7 +51,7 @@ class NewProduct extends React.Component {
               <option value="100">100%</option>
             </select>
           </label>
-          <input type="submit" value="Add" />
+          <input className="add-button" type="submit" value="Add" />
         </form>
       </div>
     )

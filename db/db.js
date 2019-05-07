@@ -3,8 +3,7 @@ const mysql = require('mysql');
 var con = mysql.createConnection({
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  database: 'vanity',
-  dateStrings: true
+  database: 'vanity'
 });
 
 con.connect((err) => {

@@ -27,9 +27,9 @@ class Product extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const {brand, productName, notes, datePurchased, amountRemaining} = this.state;
-    const updatedProductInfo = {brand, productName, notes, datePurchased: formatDate(datePurchased), amountRemaining};
-    this.props.updateProduct(this.props.product.productId, updatedProductInfo).then(() => this.setState({isEditing: false}));
+    const { brand, productName, notes, datePurchased, amountRemaining } = this.state;
+    const updatedProductInfo = { brand, productName, notes, datePurchased: formatDate(datePurchased), amountRemaining };
+    this.props.updateProduct(this.props.product.productId, updatedProductInfo).then(() => this.setState({ isEditing: false }));
 
   }
 
@@ -38,24 +38,22 @@ class Product extends React.Component {
     if (this.state.isEditing) {
       return (
         <div>
-
           <div>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="edit-row">
               <label>
-                Brand: <input type="text" value={this.state.brand} onChange={e => this.setState({ brand: e.target.value })} />
+                <input type="text" value={this.state.brand} onChange={e => this.setState({ brand: e.target.value })} />
               </label>
               <label>
-                Product Name: <input type="text" value={this.state.productName} onChange={e => this.setState({ productName: e.target.value })} />
+                <input type="text" value={this.state.productName} onChange={e => this.setState({ productName: e.target.value })} />
               </label>
               <label>
-                Notes: <textarea value={this.state.notes} onChange={e => this.setState({ notes: e.target.value })} />
+                <textarea value={this.state.notes} onChange={e => this.setState({ notes: e.target.value })} />
               </label>
               <label>
-                Date Purchased <input type="date" value={formatDate(this.state.datePurchased)} onChange={e => this.setState({ datePurchased: e.target.value })} />
+                <input type="date" value={formatDate(this.state.datePurchased)} onChange={e => this.setState({ datePurchased: e.target.value })} />
               </label>
               <label>
-                Amount Remaining:
-          <select value={this.state.amountRemaining} onChange={e => this.setState({ amountRemaining: e.target.value })}>
+                <select value={this.state.amountRemaining} onChange={e => this.setState({ amountRemaining: e.target.value })}>
                   <option value="0">0%</option>
                   <option value="25">25%</option>
                   <option value="50">50%</option>
@@ -63,7 +61,16 @@ class Product extends React.Component {
                   <option value="100">100%</option>
                 </select>
               </label>
-              <input type="submit" value="Save" />
+              <div>
+                <input className="save-button" type="submit" value="Save" />
+                <button type="button" className="cancel-button" onClick={() => this.setState({
+                  isEditing: false, brand: this.props.product.brand,
+                  productName: this.props.product.productName,
+                  notes: this.props.product.notes,
+                  datePurchased: this.props.product.datePurchased,
+                  amountRemaining: this.props.product.amountRemaining
+                })}>Cancel</button>
+              </div>
             </form>
           </div>
 
@@ -73,10 +80,10 @@ class Product extends React.Component {
       return (
         <div className="product-row">
           <div>{this.props.product.brand}</div>
-          <div>{this.props.product.productName}</div>
-          <div>{this.props.product.notes}</div>
+          <div className="product-name">{this.props.product.productName}</div>
+          <div className="product-notes">{this.props.product.notes}</div>
           <div>{formatDateForDisplay(this.props.product.datePurchased)}</div>
-          <div>{this.props.product.amountRemaining}%</div>
+          <div className="product-remaining">{this.props.product.amountRemaining}%</div>
           <div className="product-buttons">
             <button onClick={() => this.setState({ isEditing: true })}>edit</button>
             <button onClick={() => this.props.deleteProduct(id, this.props.product)}>delete</button>
@@ -92,7 +99,7 @@ class Product extends React.Component {
 
 function ProductList(props) {
   return (
-    <div>
+    <div className="product-container">
       {props.productList.map(product => {
         return <Product product={product} key={product.productId} updateProduct={props.updateProduct} deleteProduct={props.deleteProduct} />
       })}
